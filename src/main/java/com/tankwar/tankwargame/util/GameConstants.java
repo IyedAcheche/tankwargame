@@ -32,7 +32,7 @@ public final class GameConstants {
     
     // Movement speeds
     public static final double TANK_SPEED = 3.0;
-    public static final double ENEMY_TANK_SPEED = 2.0; // Noticeably slower than player
+    public static final double ENEMY_TANK_SPEED = 1.5; // Slower than player for easier gameplay
     public static final double MISSILE_SPEED = 4.0;
     
     // Timing constants
@@ -74,4 +74,5 @@ public final class GameConstants {
         throw new UnsupportedOperationException("Constants class cannot be instantiated");
     }
 }
+
 
