@@ -243,28 +243,17 @@ public class GameEngine {
     private void checkVictoryConditions() {
         if (gameOverNotified) return;
         
+        // Apple is just a score booster - player collects it for +100 points
         if (goldenApple != null && goldenApple.isActive() && playerTank.isActive()) {
             if (goldenApple.intersects(playerTank)) {
                 playerCollectedApple = true;
                 goldenApple.setActive(false);
                 GameState.getInstance().addScore(100);
-                eventSubject.notifyGameOver(true);
-                gameOverNotified = true;
-                return;
+                // Don't end game - apple is just a bonus
             }
         }
         
-        if (goldenApple != null && goldenApple.isActive()) {
-            for (EnemyTank enemy : enemyTanks) {
-                if (enemy.isActive() && goldenApple.intersects(enemy)) {
-                    goldenApple.setActive(false);
-                    eventSubject.notifyGameOver(false);
-                    gameOverNotified = true;
-                    return;
-                }
-            }
-        }
-        
+        // Check win/lose conditions (apple no longer affects game ending)
         if (isGameOver() && !gameOverNotified) {
             eventSubject.notifyGameOver(playerWon());
             gameOverNotified = true;
@@ -347,7 +336,7 @@ public class GameEngine {
                         explosions.add(factory.createLargeExplosion(impactX, impactY));
                         eventSubject.notifyTankDestroyed(enemy);
                         if (missile.getOwner() != null && missile.getOwner().isPlayer()) {
-                            GameState.getInstance().addScore(30);
+                            GameState.getInstance().addScore(25);
                         }
                     } else {
                         explosions.add(factory.createSmallExplosion(impactX, impactY));
@@ -431,20 +420,17 @@ public class GameEngine {
     }
     
     public boolean isGameOver() {
-        return !playerTank.isActive() || getEnemyCount() == 0 || 
-               playerCollectedApple || (goldenApple != null && !goldenApple.isActive());
+        // Game ends when player dies OR all enemies are defeated
+        return !playerTank.isActive() || getEnemyCount() == 0;
     }
     
     public boolean playerWon() {
-        if (playerCollectedApple) {
-            return true;
-        }
-        return playerTank.isActive() && getEnemyCount() == 0 && 
-               (goldenApple == null || goldenApple.isActive());
+        // Player wins by defeating all enemies while staying alive
+        return playerTank.isActive() && getEnemyCount() == 0;
     }
     
     public boolean appleDestroyed() {
-        return goldenApple != null && !goldenApple.isActive() && !playerCollectedApple;
+        return false; // Apple no longer affects game state
     }
     
     public boolean playerCollectedApple() {
