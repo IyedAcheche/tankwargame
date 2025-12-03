@@ -48,3 +48,4 @@ public class MedPack extends GameObject {
     public int getHealAmount() { return healAmount; }
 }
 
+

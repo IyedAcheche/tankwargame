@@ -45,3 +45,4 @@ public abstract class GameObject {
     public void setPosition(double x, double y) { this.x = x; this.y = y; }
 }
 
+
