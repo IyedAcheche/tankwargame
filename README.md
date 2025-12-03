@@ -58,26 +58,6 @@ A 2D tank battle game built with JavaFX. Players control a tank to fight enemy t
 - `EnemyBehavior` - AI movement and shooting
 - Different behaviors without changing Tank class
 
-## Project Structure
-
-```
-src/main/java/com/tankwar/tankwargame/
-├── TankWarGame.java          # Main JavaFX application
-├── GameEngine.java           # Core game logic  
-├── GameState.java            # Game state management
-├── GameObjectFactory.java    # Object creation
-├── GameObject.java           # Base class for all objects
-├── Tank.java                # Tank base class
-├── PlayerTank.java          # Player tank
-├── EnemyTank.java           # Enemy tank
-├── TankBehavior.java        # Tank AI interface
-├── Missile.java             # Projectiles
-├── Wall.java                # Obstacles
-├── MedPack.java             # Health pickups
-├── Explosion.java           # Visual effects
-├── Direction.java           # Movement directions
-└── GameConstants.java       # Game settings
-```
 
 ## How to Run
 
@@ -90,11 +70,3 @@ Or alternatively:
 ./mvnw clean compile exec:java
 ```
 
-## Key Learning Points
-
-1. **Inheritance** - Code reuse through class hierarchies
-2. **Polymorphism** - Same interface, different behaviors  
-3. **Encapsulation** - Data protection and controlled access
-4. **Design Patterns** - Structured solutions to common problems
-5. **JavaFX** - Modern Java GUI development
-6. **Game Programming** - Game loops, collision detection, state management

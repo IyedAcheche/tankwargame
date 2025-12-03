@@ -1,4 +1,4 @@
-package com.tankwar.tankwargame;
+package com.tankwar.tankwargame.entities.base;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -9,7 +9,6 @@ import javafx.scene.image.Image;
  * @author Iyed Acheche
  */
 public abstract class GameObject {
-    // Protected fields for inheritance
     protected double x, y;
     protected int width, height;
     protected Image image;
@@ -22,17 +21,14 @@ public abstract class GameObject {
         this.height = height;
     }
     
-    // Abstract method - each subclass implements differently
     public abstract void update();
     
-    // Default render method - can be overridden
     public void render(GraphicsContext gc) {
         if (active && image != null) {
             gc.drawImage(image, x, y, width, height);
         }
     }
     
-    // Collision detection for all objects
     public boolean intersects(GameObject other) {
         return x < other.x + other.width &&
                x + width > other.x &&
@@ -40,7 +36,6 @@ public abstract class GameObject {
                y + height > other.y;
     }
     
-    // Getters for encapsulation
     public double getX() { return x; }
     public double getY() { return y; }
     public int getWidth() { return width; }

@@ -1,17 +1,19 @@
-package com.tankwar.tankwargame;
+package com.tankwar.tankwargame.factory;
+
+import com.tankwar.tankwargame.entities.effects.Explosion;
+import com.tankwar.tankwargame.entities.pickups.MedPack;
+import com.tankwar.tankwargame.entities.tanks.*;
+import com.tankwar.tankwargame.util.Direction;
 
 /**
  * Factory for creating game objects (Factory + Singleton patterns).
  * @author Iyed Acheche
  */
 public class GameObjectFactory {
-    // Singleton instance
     private static GameObjectFactory instance;
     
-    // Private constructor for Singleton
     private GameObjectFactory() {}
     
-    // Get singleton instance
     public static GameObjectFactory getInstance() {
         if (instance == null) {
             instance = new GameObjectFactory();
@@ -19,7 +21,6 @@ public class GameObjectFactory {
         return instance;
     }
     
-    // Factory method for creating tanks
     public Tank createTank(double x, double y, Direction direction, TankType type) {
         switch (type) {
             case PLAYER:
@@ -31,24 +32,22 @@ public class GameObjectFactory {
         }
     }
     
-    // Factory methods for other objects
-    public Missile createMissile(double x, double y, Direction direction, Tank owner) {
-        return new Missile(x, y, direction, owner);
-    }
-    
-    public Wall createWall(double x, double y) {
-        return new Wall(x, y);
-    }
-    
     public MedPack createMedPack(double x, double y) {
         return new MedPack(x, y);
     }
     
-    public Explosion createExplosion(double x, double y) {
-        return new Explosion(x, y);
+    public Explosion createSmallExplosion(double x, double y) {
+        return new Explosion(x, y, Explosion.Size.SMALL);
     }
     
-    // Enum for tank types
+    public Explosion createMediumExplosion(double x, double y) {
+        return new Explosion(x, y, Explosion.Size.MEDIUM);
+    }
+    
+    public Explosion createLargeExplosion(double x, double y) {
+        return new Explosion(x, y, Explosion.Size.LARGE);
+    }
+    
     public enum TankType {
         PLAYER, ENEMY
     }
